@@ -12,7 +12,7 @@
 | Path | Lakehouse location |
 |---|---|
 | `data/input/landing/<table>/*.csv` | `Files/landing/<table>/` (one folder per table) |
-| `src/fabric/config/table_config.json` | `Files/config/table_config.json` |
+| `config/table_config.json` | `Files/config/table_config.json` |
 | `data/input/incremental`, `data/input/bad` | `Files/demo_drops/` (moved into `landing/` during the demo) |
 
 ## Tips & tricks

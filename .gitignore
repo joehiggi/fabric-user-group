@@ -7,3 +7,6 @@ __pycache__/
 # Power BI Desktop local files
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+
+# Local deployment settings (copy of config/environment.example.json)
+config/environment.json

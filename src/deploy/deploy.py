@@ -7,8 +7,10 @@ Prereqs
     fab auth login                      # sign in to the HOST tenant (interactive)
 
 Usage
-    python3 src/deploy/deploy.py --workspace "Fabric User Group Demo" --capacity <capacity-name>
-    python3 src/deploy/deploy.py --workspace "Fabric User Group Demo" --dry-run   # print commands only
+    cp config/environment.example.json config/environment.json   # edit: workspace, capacity, ...
+    python3 src/deploy/deploy.py              # reads config/environment.json
+    python3 src/deploy/deploy.py --dry-run    # print commands only
+    python3 src/deploy/deploy.py --workspace "Other WS" --capacity <name>   # flags override the file
 
 What it does (idempotent; safe to re-run)
     1. Creates the workspace (if --capacity given and it doesn't exist) and lakehouse
@@ -109,14 +111,34 @@ def stage_pipeline(tokens: dict[str, str], with_notifications: bool, notify_to: 
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--workspace", required=True, help="Workspace display name")
+    ap.add_argument("--config", default=str(ROOT / "config/environment.json"),
+                    help="Settings file (default config/environment.json); CLI flags override it")
+    ap.add_argument("--workspace", help="Workspace display name")
     ap.add_argument("--capacity", help="Capacity name - only needed if the workspace must be created")
-    ap.add_argument("--lakehouse", default="lh_sales")
-    ap.add_argument("--with-notifications", action="store_true")
+    ap.add_argument("--lakehouse")
+    ap.add_argument("--with-notifications", action="store_true", default=None)
     ap.add_argument("--notify-to", help="Email for pipeline notifications")
     ap.add_argument("--skip-run", action="store_true", help="Don't run the pipeline")
     ap.add_argument("--dry-run", action="store_true", help="Print fab commands; use fake IDs")
     a = ap.parse_args()
+
+    # Settings: defaults < config file < command-line flags
+    settings = {"workspace": None, "capacity": None, "lakehouse": "lh_sales",
+                "notify_to": None, "with_notifications": False}
+    cfg = Path(a.config)
+    if cfg.exists():
+        settings.update({k: v for k, v in json.loads(cfg.read_text()).items() if v not in (None, "")})
+        print(f"Using settings from {cfg.relative_to(ROOT) if cfg.is_relative_to(ROOT) else cfg}")
+    for key in settings:
+        if getattr(a, key, None) is not None:
+            settings[key] = getattr(a, key)
+    if str(settings["capacity"]).startswith("<"):
+        settings["capacity"] = None  # untouched placeholder from the example file
+    if not settings["workspace"]:
+        sys.exit("No workspace. Copy config/environment.example.json to config/environment.json, "
+                 "or pass --workspace.")
+    for key, value in settings.items():
+        setattr(a, key, value)
 
     fab = Fab(a.dry_run)
     ws = f"{a.workspace}.Workspace"
@@ -147,7 +169,7 @@ def main() -> None:
 
     print("\n[2] Upload files to OneLake")
     uploads = [(p, f"Files/landing/{p.parent.name}") for p in sorted((ROOT / "data/input/landing").rglob("*.csv"))]
-    uploads.append((SRC / "fabric/config/table_config.json", "Files/config"))
+    uploads.append((ROOT / "config/table_config.json", "Files/config"))
     uploads += [(p, "Files/demo_drops") for p in sorted((ROOT / "data/input").glob("[ib]*/*.csv"))]
     made = set()
     for local, folder in uploads:

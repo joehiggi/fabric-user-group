@@ -68,7 +68,7 @@ class TestNotebooks(unittest.TestCase):
 class TestConfigAndPipeline(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.config = json.loads((ROOT / "src/fabric/config/table_config.json").read_text())
+        cls.config = json.loads((ROOT / "config/table_config.json").read_text())
         cls.pipe = json.loads(PIPE.read_text())["properties"]
 
     def test_config_tables_have_schema_and_data(self):
@@ -151,10 +151,21 @@ class TestPbip(unittest.TestCase):
             self.assertTrue((RP / "definition/pages" / p / "page.json").exists())
 
 
+class TestConfig(unittest.TestCase):
+    def test_example_environment_is_shareable(self):
+        env = json.loads((ROOT / "config/environment.example.json").read_text())
+        self.assertEqual(set(env), {"workspace", "capacity", "lakehouse", "notify_to", "with_notifications"})
+        self.assertTrue(env["notify_to"].endswith("@example.com"))
+
+    def test_local_environment_is_gitignored(self):
+        self.assertIn("config/environment.json", (ROOT / ".gitignore").read_text())
+
+
 class TestDeploy(unittest.TestCase):
     def test_dry_run_fills_every_token(self):
-        r = subprocess.run([sys.executable, str(ROOT / "src/deploy/deploy.py"), "--workspace", "UnitTest",
-                            "--dry-run", "--with-notifications"], capture_output=True, text=True)
+        r = subprocess.run([sys.executable, str(ROOT / "src/deploy/deploy.py"),
+                            "--config", str(ROOT / "config/environment.example.json"),
+                            "--workspace", "UnitTest", "--dry-run", "--with-notifications"], capture_output=True, text=True)
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertNotIn("unreplaced tokens", r.stdout)
 

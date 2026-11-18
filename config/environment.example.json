@@ -1,0 +1,7 @@
+{
+  "workspace": "Fabric User Group Demo",
+  "capacity": "<your-capacity-name>",
+  "lakehouse": "lh_sales",
+  "notify_to": "you@example.com",
+  "with_notifications": false
+}

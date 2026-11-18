@@ -17,11 +17,13 @@ fab ls                         # sanity check: lists workspaces you can see
 
 ## Deploy everything
 ```bash
-make deploy WS="Fabric User Group Demo" CAPACITY=<capacity-name>
-# or
-python3 src/deploy/deploy.py --workspace "Fabric User Group Demo" --capacity <capacity-name>
-python3 src/deploy/deploy.py --workspace "Fabric User Group Demo" --dry-run   # preview commands
+make config        # creates config/environment.json from the example; edit workspace + capacity
+make dry-run       # preview every fab command, no tenant needed
+make deploy        # the real thing
+make deploy ARGS='--workspace "Another WS" --with-notifications'   # flags override the file
 ```
+Settings are read in this order: built-in defaults, then `config/environment.json`, then command-line flags. Your `environment.json` is git-ignored, so tenant names never get committed. See [config/README.md](../config/README.md).
+
 The script:
 1. creates the workspace (if needed) and the `lh_sales` lakehouse
 2. uploads landing files, config and demo drops
