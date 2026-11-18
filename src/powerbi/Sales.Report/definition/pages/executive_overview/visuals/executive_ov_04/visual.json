@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "executive_ov_04",
+  "position": {
+    "x": 650,
+    "y": 100,
+    "z": 4,
+    "width": 300,
+    "height": 120,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_sales"
+                    }
+                  },
+                  "Property": "Target Attainment %"
+                }
+              },
+              "queryRef": "fact_sales.Target Attainment %",
+              "nativeQueryRef": "Target Attainment %"
+            }
+          ]
+        }
+      }
+    },
+    "drawVisualDataBars": false
+  }
+}

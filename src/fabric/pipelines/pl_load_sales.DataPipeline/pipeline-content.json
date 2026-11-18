@@ -1,0 +1,164 @@
+{
+  "properties": {
+    "description": "Metadata-driven load: config -> ForEach(load table w/ retry) -> dim_date -> data quality -> semantic model refresh -> notify. Placeholder tokens are filled by src/deploy/deploy.py.",
+    "parameters": {
+      "simulate_failure_for_table": { "type": "string", "defaultValue": "" },
+      "notify_to": { "type": "string", "defaultValue": "data-team@example.com" }
+    },
+    "activities": [
+      {
+        "name": "Get table config",
+        "type": "Lookup",
+        "dependsOn": [],
+        "policy": { "timeout": "0.00:05:00", "retry": 2, "retryIntervalInSeconds": 30 },
+        "typeProperties": {
+          "source": {
+            "type": "JsonSource",
+            "storeSettings": { "type": "LakehouseReadSettings", "recursive": false },
+            "formatSettings": { "type": "JsonReadSettings" }
+          },
+          "datasetSettings": {
+            "type": "Json",
+            "linkedService": {
+              "name": "lh_sales",
+              "properties": {
+                "type": "Lakehouse",
+                "typeProperties": {
+                  "workspaceId": "{{WORKSPACE_ID}}",
+                  "artifactId": "{{LAKEHOUSE_ID}}",
+                  "rootFolder": "Files"
+                }
+              }
+            },
+            "typeProperties": {
+              "location": { "type": "LakehouseLocation", "folderPath": "config", "fileName": "table_config.json" }
+            },
+            "schema": {}
+          },
+          "firstRowOnly": false
+        }
+      },
+      {
+        "name": "Enabled tables",
+        "type": "Filter",
+        "dependsOn": [{ "activity": "Get table config", "dependencyConditions": ["Succeeded"] }],
+        "typeProperties": {
+          "items": { "value": "@activity('Get table config').output.value", "type": "Expression" },
+          "condition": { "value": "@equals(item().enabled, true)", "type": "Expression" }
+        }
+      },
+      {
+        "name": "Load tables",
+        "type": "ForEach",
+        "dependsOn": [{ "activity": "Enabled tables", "dependencyConditions": ["Succeeded"] }],
+        "typeProperties": {
+          "items": { "value": "@activity('Enabled tables').output.value", "type": "Expression" },
+          "isSequential": false,
+          "batchCount": 4,
+          "activities": [
+            {
+              "name": "Load table",
+              "type": "TridentNotebook",
+              "dependsOn": [],
+              "policy": { "timeout": "0.00:30:00", "retry": 2, "retryIntervalInSeconds": 30 },
+              "typeProperties": {
+                "workspaceId": "{{WORKSPACE_ID}}",
+                "notebookId": "{{NB_LOAD_TABLE_ID}}",
+                "parameters": {
+                  "table_name":   { "value": { "value": "@item().table_name",  "type": "Expression" }, "type": "string" },
+                  "source_path":  { "value": { "value": "@item().source_path", "type": "Expression" }, "type": "string" },
+                  "load_mode":    { "value": { "value": "@item().load_mode",   "type": "Expression" }, "type": "string" },
+                  "key_columns":  { "value": { "value": "@item().key_columns", "type": "Expression" }, "type": "string" },
+                  "batch_id":     { "value": { "value": "@pipeline().RunId",   "type": "Expression" }, "type": "string" },
+                  "simulate_failure_for_table": {
+                    "value": { "value": "@pipeline().parameters.simulate_failure_for_table", "type": "Expression" },
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Build dim_date",
+        "type": "TridentNotebook",
+        "dependsOn": [{ "activity": "Load tables", "dependencyConditions": ["Succeeded"] }],
+        "policy": { "timeout": "0.00:15:00", "retry": 1, "retryIntervalInSeconds": 30 },
+        "typeProperties": { "workspaceId": "{{WORKSPACE_ID}}", "notebookId": "{{NB_BUILD_DIM_DATE_ID}}" }
+      },
+      {
+        "name": "Data quality",
+        "type": "TridentNotebook",
+        "dependsOn": [{ "activity": "Build dim_date", "dependencyConditions": ["Succeeded"] }],
+        "policy": { "timeout": "0.00:15:00", "retry": 0, "retryIntervalInSeconds": 30 },
+        "typeProperties": {
+          "workspaceId": "{{WORKSPACE_ID}}",
+          "notebookId": "{{NB_DATA_QUALITY_ID}}",
+          "parameters": {
+            "batch_id": { "value": { "value": "@pipeline().RunId", "type": "Expression" }, "type": "string" }
+          }
+        }
+      },
+      {
+        "name": "Refresh semantic model",
+        "type": "PBISemanticModelRefresh",
+        "dependsOn": [{ "activity": "Data quality", "dependencyConditions": ["Succeeded"] }],
+        "policy": { "timeout": "0.00:15:00", "retry": 2, "retryIntervalInSeconds": 60 },
+        "typeProperties": {
+          "method": "post",
+          "groupId": "{{WORKSPACE_ID}}",
+          "datasetId": "{{SEMANTIC_MODEL_ID}}",
+          "commitMode": "Transactional",
+          "waitOnCompletion": true,
+          "operationType": "SemanticModelRefresh"
+        }
+      },
+      {
+        "name": "Notify success",
+        "type": "Office365Outlook",
+        "dependsOn": [{ "activity": "Refresh semantic model", "dependencyConditions": ["Succeeded"] }],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/v2/Mail",
+            "body": {
+              "To": "@pipeline().parameters.notify_to",
+              "Subject": "@concat('[OK] ', pipeline().PipelineName, ' succeeded')",
+              "Body": "<p><b>@{pipeline().PipelineName}</b> finished at @{utcNow()} UTC.</p><p>Tables loaded: @{activity('Enabled tables').output.FilteredItemsCount}<br/>Data quality: @{activity('Data quality').output.result.exitValue}</p><p>Run ID: @{pipeline().RunId}</p>",
+              "Importance": "Normal"
+            }
+          }
+        }
+      },
+      {
+        "name": "Notify failure",
+        "description": "Single catch-all: if ANY upstream step fails, everything after it is Skipped, so 'Failed OR Skipped' on the LAST step catches the whole chain.",
+        "type": "Office365Outlook",
+        "dependsOn": [{ "activity": "Refresh semantic model", "dependencyConditions": ["Failed", "Skipped"] }],
+        "typeProperties": {
+          "inputs": {
+            "method": "post",
+            "path": "/v2/Mail",
+            "body": {
+              "To": "@pipeline().parameters.notify_to",
+              "Subject": "@concat('[FAILED] ', pipeline().PipelineName)",
+              "Body": "<p><b>@{pipeline().PipelineName}</b> failed at @{utcNow()} UTC.</p><p>Run ID: @{pipeline().RunId}<br/>Check Monitor hub and the etl_run_log / dq_results tables for details.</p>",
+              "Importance": "High"
+            }
+          }
+        }
+      },
+      {
+        "name": "Mark run as failed",
+        "description": "A handled failure (catch path succeeded) shows the run as Succeeded. This Fail activity keeps Monitor hub honest.",
+        "type": "Fail",
+        "dependsOn": [{ "activity": "Notify failure", "dependencyConditions": ["Completed"] }],
+        "typeProperties": {
+          "message": { "value": "@concat('Load failed. Run ', pipeline().RunId, '. See etl_run_log.')", "type": "Expression" },
+          "errorCode": "500"
+        }
+      }
+    ]
+  }
+}

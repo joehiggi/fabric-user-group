@@ -1,0 +1,82 @@
+table dim_customer
+	lineageTag: 7534cc80-d27b-5a63-aad2-3652f9cc7d4d
+
+	column customer_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: customer_id
+		lineageTag: 1df1a152-f7ac-5d44-9f9b-c27bfe334eb0
+
+	column customer_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: customer_name
+		lineageTag: 86f7b38c-996c-5ff5-8061-6199e29152d6
+
+	column industry
+		dataType: string
+		summarizeBy: none
+		sourceColumn: industry
+		lineageTag: f22ac558-8b53-58ca-8aef-c0d0babc7fcd
+
+	column segment
+		dataType: string
+		summarizeBy: none
+		sourceColumn: segment
+		lineageTag: 20d6dc29-ea81-519f-948d-d31b9d3def31
+
+	column territory_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: territory_id
+		lineageTag: e8111831-c5b0-5749-b3f1-d63b9bfb84cf
+
+	column city
+		dataType: string
+		summarizeBy: none
+		sourceColumn: city
+		lineageTag: 71bdb965-0f9a-5b0a-a30c-e61061aa8ef1
+
+	column country
+		dataType: string
+		summarizeBy: none
+		sourceColumn: country
+		lineageTag: f6bbfd43-290f-5cbb-add3-20f5b05f2e94
+
+	column customer_since
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: customer_since
+		lineageTag: 4f151dd9-2821-5394-970e-42e12da34aa4
+
+	column _source_file
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _source_file
+		lineageTag: 58a62e8d-c866-586a-a6a4-4238177163cb
+
+	column _batch_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _batch_id
+		lineageTag: af42dbd7-76c9-5135-8462-bd855e1ed27e
+
+	column _loaded_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		isHidden
+		summarizeBy: none
+		sourceColumn: _loaded_at
+		lineageTag: f7a74f35-0953-5406-a7e9-793ad716c854
+
+	partition dim_customer = entity
+		mode: directLake
+		source
+			entityName: dim_customer
+			schemaName: dbo
+			expressionSource: DatabaseQuery

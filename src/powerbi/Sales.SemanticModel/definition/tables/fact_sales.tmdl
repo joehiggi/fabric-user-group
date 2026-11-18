@@ -1,0 +1,237 @@
+table fact_sales
+	lineageTag: f9c43c16-aa37-5e87-9b0e-a566b50302e4
+
+	/// Net revenue from Completed + Shipped orders.
+	measure Revenue = CALCULATE ( SUM ( fact_sales[net_amount] ), KEEPFILTERS ( fact_sales[order_status] IN { "Completed", "Shipped" } ) )
+		formatString: \$#,0
+		displayFolder: Sales
+		lineageTag: c1b45bbd-fe53-53a0-b67c-858484b5e6b6
+
+	measure Cost = CALCULATE ( SUM ( fact_sales[cost_amount] ), KEEPFILTERS ( fact_sales[order_status] IN { "Completed", "Shipped" } ) )
+		formatString: \$#,0
+		displayFolder: Sales
+		lineageTag: 349c1cc3-c3c6-54e3-8b36-34306d73dd58
+
+	measure 'Gross Margin' = [Revenue] - [Cost]
+		formatString: \$#,0
+		displayFolder: Sales
+		lineageTag: 8429de15-73db-57e6-8f2b-6f5ed016d6a3
+
+	measure 'Gross Margin %' = DIVIDE ( [Gross Margin], [Revenue] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Sales
+		lineageTag: d389f30c-1761-561f-a239-53a5a22497c1
+
+	measure Orders = CALCULATE ( DISTINCTCOUNT ( fact_sales[order_id] ), KEEPFILTERS ( fact_sales[order_status] IN { "Completed", "Shipped" } ) )
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: bbefc096-94be-5636-8c7a-df3d222f8ebb
+
+	measure 'Avg Order Value' = DIVIDE ( [Revenue], [Orders] )
+		formatString: \$#,0
+		displayFolder: Sales
+		lineageTag: 4bd56aeb-20ec-5385-9f9c-79a7c73a7277
+
+	measure Units = CALCULATE ( SUM ( fact_sales[quantity] ), KEEPFILTERS ( fact_sales[order_status] IN { "Completed", "Shipped" } ) )
+		formatString: #,0
+		displayFolder: Sales
+		lineageTag: fb20363b-f523-5b32-adbc-7ed7fb512cb5
+
+	measure 'Avg Discount %' = AVERAGE ( fact_sales[discount_pct] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Sales
+		lineageTag: 1d99c813-51b5-5b99-a6ac-2e8c196a94cd
+
+	measure 'Cancellation Rate' = DIVIDE ( CALCULATE ( DISTINCTCOUNT ( fact_sales[order_id] ), fact_sales[order_status] = "Cancelled" ), DISTINCTCOUNT ( fact_sales[order_id] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Sales
+		lineageTag: d751e36b-5aa3-5f93-bb64-c346d4a5fe32
+
+	measure 'Revenue PY' = CALCULATE ( [Revenue], SAMEPERIODLASTYEAR ( dim_date[date] ) )
+		formatString: \$#,0
+		displayFolder: Time Intelligence
+		lineageTag: 75b9a91f-96bd-5474-8821-40448f9123f1
+
+	measure 'Revenue YoY %' = DIVIDE ( [Revenue] - [Revenue PY], [Revenue PY] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Time Intelligence
+		lineageTag: 9fdd102b-1241-5475-ab26-8b1b724dfd7d
+
+	measure 'Revenue YTD' = TOTALYTD ( [Revenue], dim_date[date] )
+		formatString: \$#,0
+		displayFolder: Time Intelligence
+		lineageTag: bea5e212-2769-591f-9835-f15d027ff605
+
+	measure 'Revenue MTD' = TOTALMTD ( [Revenue], dim_date[date] )
+		formatString: \$#,0
+		displayFolder: Time Intelligence
+		lineageTag: 418f7128-d47e-51e7-9f44-21a52cddd0e9
+
+	/// Monthly target, stored on the 1st of each month.
+	measure Target = SUM ( fact_sales_target[target_amount] )
+		formatString: \$#,0
+		displayFolder: Targets
+		lineageTag: 65506e5b-54e4-5432-a8ba-5ad8d215d1b5
+
+	measure 'Variance to Target' = [Revenue] - [Target]
+		formatString: \$#,0
+		displayFolder: Targets
+		lineageTag: 94eebe80-84a8-5269-b233-6ae6d654d60e
+
+	measure 'Target Attainment %' = DIVIDE ( [Revenue], [Target] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Targets
+		lineageTag: 0f99bb3b-c21e-5c04-87f7-c6046112b47a
+
+	/// Use in conditional formatting: Format > Field value.
+	measure 'Attainment Color' = SWITCH ( TRUE (), ISBLANK ( [Target] ), BLANK (), [Target Attainment %] >= 1, "#1B7F5C", [Target Attainment %] >= 0.9, "#C98A00", "#B23A3A" )
+		displayFolder: Targets
+		lineageTag: 5c3e9c14-9c5e-5ae9-9041-b722e0c48bec
+
+	measure 'Rep Revenue Rank' = IF ( HASONEVALUE ( dim_sales_rep[sales_rep_name] ), RANKX ( ALLSELECTED ( dim_sales_rep[sales_rep_name] ), [Revenue] ) )
+		formatString: 0
+		displayFolder: Sales
+		lineageTag: b682a220-258e-5e8f-9c74-405614c3618a
+
+	measure 'Data As Of' = MAX ( fact_sales[_loaded_at] )
+		formatString: yyyy-mm-dd hh:nn
+		displayFolder: Ops
+		lineageTag: d9fd19cf-0680-5ffa-a04a-2be529d3174c
+
+	column order_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: order_id
+		lineageTag: 0ba34b52-aa28-5a10-828d-ecbd2e855276
+
+	column order_line
+		dataType: int64
+		formatString: 0
+		isHidden
+		summarizeBy: none
+		sourceColumn: order_line
+		lineageTag: 79cff3aa-b921-5459-857d-afa9f58ae4f8
+
+	column order_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		isHidden
+		summarizeBy: none
+		sourceColumn: order_date
+		lineageTag: 95efa3be-c640-5271-857f-f231e8d2550f
+
+	column ship_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: ship_date
+		lineageTag: 004bf6fd-c025-5e63-b836-2712ff5f906e
+
+	column customer_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: customer_id
+		lineageTag: 7e03be05-dda0-558e-b91c-4c35840a6202
+
+	column product_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: product_id
+		lineageTag: 495a93ea-1b8d-5f4a-8e73-86676896afcc
+
+	column sales_rep_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: sales_rep_id
+		lineageTag: 8d0f4cf6-0dfa-583c-9bd5-983f158b6108
+
+	column territory_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: territory_id
+		lineageTag: c7833147-e9f9-57eb-89e5-bae22273a43f
+
+	column channel
+		dataType: string
+		summarizeBy: none
+		sourceColumn: channel
+		lineageTag: d8328d56-8ad3-538f-aac5-800653e50eec
+
+	column quantity
+		dataType: int64
+		formatString: #,0
+		isHidden
+		summarizeBy: sum
+		sourceColumn: quantity
+		lineageTag: ec935591-6002-5202-a4b5-8296799857af
+
+	column unit_price
+		dataType: decimal
+		formatString: \$#,0
+		isHidden
+		summarizeBy: sum
+		sourceColumn: unit_price
+		lineageTag: 0601edc9-fe18-5083-93f6-d8c930d27ce9
+
+	column discount_pct
+		dataType: decimal
+		formatString: 0.0%;-0.0%;0.0%
+		isHidden
+		summarizeBy: sum
+		sourceColumn: discount_pct
+		lineageTag: 3f505dce-f0bc-5936-81a9-e7849c8f0218
+
+	column net_amount
+		dataType: decimal
+		formatString: \$#,0
+		isHidden
+		summarizeBy: sum
+		sourceColumn: net_amount
+		lineageTag: a5a6744d-bd5f-5784-873e-a6b1f3dd242f
+
+	column cost_amount
+		dataType: decimal
+		formatString: \$#,0
+		isHidden
+		summarizeBy: sum
+		sourceColumn: cost_amount
+		lineageTag: e0c636e7-463b-5093-af3c-abe64185d5e2
+
+	column order_status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: order_status
+		lineageTag: 3dfe64da-def2-586f-a5e7-6f7b0883a71b
+
+	column _source_file
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _source_file
+		lineageTag: bebeec81-da2b-57a7-ac77-4bae7e7f592c
+
+	column _batch_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _batch_id
+		lineageTag: 7cc235b7-0039-528a-b46b-b3b7c07e6435
+
+	column _loaded_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		isHidden
+		summarizeBy: none
+		sourceColumn: _loaded_at
+		lineageTag: bbf7ef5e-82c8-5625-b7fe-059b69db8362
+
+	partition fact_sales = entity
+		mode: directLake
+		source
+			entityName: fact_sales
+			schemaName: dbo
+			expressionSource: DatabaseQuery

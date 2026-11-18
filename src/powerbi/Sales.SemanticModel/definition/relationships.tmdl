@@ -1,0 +1,27 @@
+relationship 5b9debc2-ae25-577d-b3e2-d2157bf02591
+	fromColumn: fact_sales.order_date
+	toColumn: dim_date.date
+
+relationship f3e07107-d1a0-520a-b816-6d39757e6bdb
+	fromColumn: fact_sales.customer_id
+	toColumn: dim_customer.customer_id
+
+relationship 679dd8c5-e63f-553b-976c-5da396605d9a
+	fromColumn: fact_sales.product_id
+	toColumn: dim_product.product_id
+
+relationship 8e77be53-f15e-5000-bafc-e747ae0c2f3d
+	fromColumn: fact_sales.sales_rep_id
+	toColumn: dim_sales_rep.sales_rep_id
+
+relationship 95cc9398-2d97-52fb-9cb9-d7f9aee95c20
+	fromColumn: fact_sales.territory_id
+	toColumn: dim_territory.territory_id
+
+relationship 788bff92-3ae3-5c3c-bc39-53c7d94ff27c
+	fromColumn: fact_sales_target.month_start_date
+	toColumn: dim_date.date
+
+relationship 2b75192c-8b96-5c55-a801-cc93b565475b
+	fromColumn: fact_sales_target.territory_id
+	toColumn: dim_territory.territory_id

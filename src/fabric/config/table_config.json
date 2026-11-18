@@ -1,0 +1,8 @@
+[
+  {"table_name": "dim_territory",     "source_path": "Files/landing/dim_territory",     "load_mode": "overwrite", "key_columns": "territory_id",          "load_order": 1, "enabled": true},
+  {"table_name": "dim_sales_rep",     "source_path": "Files/landing/dim_sales_rep",     "load_mode": "overwrite", "key_columns": "sales_rep_id",          "load_order": 1, "enabled": true},
+  {"table_name": "dim_product",       "source_path": "Files/landing/dim_product",       "load_mode": "overwrite", "key_columns": "product_id",            "load_order": 1, "enabled": true},
+  {"table_name": "dim_customer",      "source_path": "Files/landing/dim_customer",      "load_mode": "merge",     "key_columns": "customer_id",           "load_order": 1, "enabled": true},
+  {"table_name": "fact_sales",        "source_path": "Files/landing/fact_sales",        "load_mode": "merge",     "key_columns": "order_id,order_line",   "load_order": 2, "enabled": true},
+  {"table_name": "fact_sales_target", "source_path": "Files/landing/fact_sales_target", "load_mode": "overwrite", "key_columns": "territory_id,month_start_date", "load_order": 2, "enabled": true}
+]

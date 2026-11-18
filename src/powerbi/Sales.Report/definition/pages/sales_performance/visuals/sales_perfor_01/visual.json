@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "sales_perfor_01",
+  "position": {
+    "x": 270,
+    "y": 20,
+    "z": 1,
+    "width": 240,
+    "height": 60,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_date"
+                    }
+                  },
+                  "Property": "fiscal_year"
+                }
+              },
+              "queryRef": "dim_date.fiscal_year",
+              "nativeQueryRef": "fiscal_year"
+            }
+          ]
+        }
+      }
+    },
+    "drawVisualDataBars": false
+  }
+}

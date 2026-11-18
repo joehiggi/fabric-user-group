@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "pipeline_hea_03",
+  "position": {
+    "x": 965,
+    "y": 20,
+    "z": 3,
+    "width": 295,
+    "height": 120,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dq_results"
+                    }
+                  },
+                  "Property": "DQ Checks Failed"
+                }
+              },
+              "queryRef": "dq_results.DQ Checks Failed",
+              "nativeQueryRef": "DQ Checks Failed"
+            }
+          ]
+        }
+      }
+    },
+    "drawVisualDataBars": false
+  }
+}

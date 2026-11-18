@@ -1,0 +1,50 @@
+table dim_territory
+	lineageTag: e3e100c0-d173-593b-823e-d1fe2b2c5b1e
+
+	column territory_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: territory_id
+		lineageTag: ba3dae5d-af82-577b-9f04-77405501d664
+
+	column territory_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: territory_name
+		lineageTag: 299c8827-2e91-5aaf-9de8-fcb34d4f5229
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+		lineageTag: 34d618d6-befc-5960-b604-40677ab00c12
+
+	column _source_file
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _source_file
+		lineageTag: 01248bdc-416e-544b-90ee-9b3d86299e5b
+
+	column _batch_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _batch_id
+		lineageTag: 4a453dff-19ae-57b1-8136-02219df52f0c
+
+	column _loaded_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		isHidden
+		summarizeBy: none
+		sourceColumn: _loaded_at
+		lineageTag: a1034b36-1a7f-5693-9303-abc6fbad8d1e
+
+	partition dim_territory = entity
+		mode: directLake
+		source
+			entityName: dim_territory
+			schemaName: dbo
+			expressionSource: DatabaseQuery

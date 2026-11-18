@@ -1,0 +1,150 @@
+table dim_date
+	lineageTag: 20569abf-efc5-5d43-90de-e18b20adc6e8
+	dataCategory: Time
+
+	column date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		isKey
+		summarizeBy: none
+		sourceColumn: date
+		lineageTag: cebbab0a-2780-5cec-935b-3af5ccc2d5f2
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		isHidden
+		summarizeBy: none
+		sourceColumn: date_key
+		lineageTag: 4d42cdef-63e7-5c2d-83cd-25273ca2d14b
+
+	column year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: year
+		lineageTag: a96a7d37-ee4b-5ba5-9ea7-89f30ae9dfbb
+
+	column quarter
+		dataType: string
+		summarizeBy: none
+		sourceColumn: quarter
+		lineageTag: 73777f62-e551-5cc4-ac48-13635e95a16d
+
+	column month_number
+		dataType: int64
+		formatString: 0
+		isHidden
+		summarizeBy: none
+		sourceColumn: month_number
+		lineageTag: 9402b969-19f2-5692-b4a5-9ac38dd7ea71
+
+	column month_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: month_name
+		sortByColumn: month_number
+		lineageTag: 286dc36a-c762-5d96-85fa-a74090fabdd0
+
+	column month_short
+		dataType: string
+		summarizeBy: none
+		sourceColumn: month_short
+		sortByColumn: month_number
+		lineageTag: 08dc5131-6f02-5732-b87b-0aabaf809a6f
+
+	column month_start_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: month_start_date
+		lineageTag: d4a7d448-c16e-560a-83dc-5f0cdeada055
+
+	column year_month
+		dataType: string
+		summarizeBy: none
+		sourceColumn: year_month
+		sortByColumn: year_month_sort
+		lineageTag: 3a0abda4-1441-56d5-9d3c-4131ad3b8b10
+
+	column year_month_sort
+		dataType: int64
+		formatString: 0
+		isHidden
+		summarizeBy: none
+		sourceColumn: year_month_sort
+		lineageTag: b7565ef2-1f92-5ac6-bcf3-96f785f7772a
+
+	column day_of_week_number
+		dataType: int64
+		formatString: 0
+		isHidden
+		summarizeBy: none
+		sourceColumn: day_of_week_number
+		lineageTag: 13a2532d-754f-5ddc-884e-a919b73c6b00
+
+	column day_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: day_name
+		sortByColumn: day_of_week_number
+		lineageTag: b57b25d5-c917-5f04-8250-3adb9776a595
+
+	column is_weekend
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: is_weekend
+		lineageTag: c76e2a80-0452-5534-bbb1-2f84489ccab9
+
+	column iso_week
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: iso_week
+		lineageTag: f25edbf8-86d5-577d-9182-7ff75516982d
+
+	column fiscal_year_number
+		dataType: int64
+		formatString: 0
+		isHidden
+		summarizeBy: none
+		sourceColumn: fiscal_year_number
+		lineageTag: ad77596a-fe21-56fa-973d-659a3084a8d1
+
+	column fiscal_year
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fiscal_year
+		sortByColumn: fiscal_year_number
+		lineageTag: c408b524-806b-558c-a6df-44c8dba805f3
+
+	column fiscal_quarter
+		dataType: string
+		summarizeBy: none
+		sourceColumn: fiscal_quarter
+		lineageTag: b4f47119-ac38-50af-a608-20b66ba607bd
+
+	column is_current_month
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: is_current_month
+		lineageTag: c15dbb0a-1b00-5bd7-bc95-206cdb0a6f28
+
+	column is_past_or_today
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: is_past_or_today
+		lineageTag: e2e6d2a8-7baf-562f-a4cc-154f21692646
+
+	column is_ytd
+		dataType: boolean
+		summarizeBy: none
+		sourceColumn: is_ytd
+		lineageTag: 23b4196b-420d-5010-a2b4-4e3e34521c80
+
+	partition dim_date = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: dbo
+			expressionSource: DatabaseQuery

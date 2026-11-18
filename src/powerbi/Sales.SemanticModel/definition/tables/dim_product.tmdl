@@ -1,0 +1,70 @@
+table dim_product
+	lineageTag: 20a9dbf8-fb79-54ae-9302-1267eb410f8b
+
+	column product_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: product_id
+		lineageTag: 9a557485-e462-58f5-8dcb-69cd8f475b53
+
+	column product_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: product_name
+		lineageTag: 260fd189-528c-5ff4-aae5-17236a3973ef
+
+	column category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: category
+		lineageTag: 54f30ac9-c27a-5edd-9c19-4cecf3ed9eed
+
+	column subcategory
+		dataType: string
+		summarizeBy: none
+		sourceColumn: subcategory
+		lineageTag: e6eea91c-7190-5982-9200-b8f713d0ab48
+
+	column list_price
+		dataType: decimal
+		formatString: \$#,0
+		summarizeBy: none
+		sourceColumn: list_price
+		lineageTag: 597e612b-c572-52e1-9099-7de0fb68224c
+
+	column unit_cost
+		dataType: decimal
+		formatString: \$#,0
+		summarizeBy: none
+		sourceColumn: unit_cost
+		lineageTag: a07046d0-9c92-5e60-8c98-fec5183f645f
+
+	column _source_file
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _source_file
+		lineageTag: 5462417b-ebfb-5a53-8ef4-34a3f3447ea0
+
+	column _batch_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _batch_id
+		lineageTag: a6704dd6-6b92-5442-95f4-0f12c9980f37
+
+	column _loaded_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		isHidden
+		summarizeBy: none
+		sourceColumn: _loaded_at
+		lineageTag: 7007bc85-4a33-54d3-977b-085bff78269f
+
+	partition dim_product = entity
+		mode: directLake
+		source
+			entityName: dim_product
+			schemaName: dbo
+			expressionSource: DatabaseQuery

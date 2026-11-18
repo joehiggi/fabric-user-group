@@ -1,0 +1,9 @@
+territory_id,territory_name,region
+T01,North America East,Americas
+T02,North America Central,Americas
+T03,North America West,Americas
+T04,Latin America,Americas
+T05,Northern Europe,EMEA
+T06,Southern Europe,EMEA
+T07,Australia & New Zealand,APAC
+T08,Southeast Asia,APAC

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "pipeline_hea_01",
+  "position": {
+    "x": 335,
+    "y": 20,
+    "z": 1,
+    "width": 300,
+    "height": 120,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "Failed Loads"
+                }
+              },
+              "queryRef": "etl_run_log.Failed Loads",
+              "nativeQueryRef": "Failed Loads"
+            }
+          ]
+        }
+      }
+    },
+    "drawVisualDataBars": false
+  }
+}

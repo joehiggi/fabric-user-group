@@ -1,0 +1,13 @@
+sales_rep_id,sales_rep_name,title,region,territory_id,manager_id,hire_date
+SR01,Morgan Ellis,Regional Director,Americas,,,2019-04-01
+SR02,Priya Raman,Regional Director,EMEA,,,2019-04-01
+SR03,Daniel Okafor,Regional Director,APAC,,,2019-04-01
+SR04,Avery Chen,Account Executive,Americas,T01,SR01,2022-09-12
+SR05,Jordan Brooks,Account Executive,Americas,T01,SR01,2023-12-15
+SR06,Sam Whitaker,Account Executive,Americas,T02,SR01,2022-11-23
+SR07,Elena Vasquez,Account Executive,Americas,T03,SR01,2024-01-03
+SR08,Lucas Ferreira,Account Executive,Americas,T04,SR01,2024-04-25
+SR09,Hannah Lindqvist,Account Executive,EMEA,T05,SR02,2023-06-03
+SR10,Marco Bellini,Account Executive,EMEA,T06,SR02,2021-03-19
+SR11,Grace Thompson,Account Executive,APAC,T07,SR03,2020-02-12
+SR12,Wei Ling Tan,Account Executive,APAC,T08,SR03,2021-06-04

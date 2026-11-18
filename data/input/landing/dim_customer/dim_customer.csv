@@ -1,0 +1,61 @@
+customer_id,customer_name,industry,segment,territory_id,city,country,customer_since
+C0001,Riverbend Engineering,Professional Services,Mid-Market,T03,Seattle,United States,2018-07-26
+C0002,Ironwood Energy,Energy & Utilities,Mid-Market,T01,Toronto,Canada,2021-05-12
+C0003,Stonegate Partners,Professional Services,Enterprise,T02,Chicago,United States,2023-05-13
+C0004,Bluewater Manufacturing,Manufacturing,SMB,T02,Chicago,United States,2018-08-18
+C0005,Northbridge Partners,Professional Services,Mid-Market,T02,Chicago,United States,2020-12-17
+C0006,Cedar Foods,Consumer Goods,SMB,T06,Lisbon,Portugal,2020-07-03
+C0007,Oakridge Energy,Energy & Utilities,Mid-Market,T01,Boston,United States,2018-04-07
+C0008,Cedar Health,Healthcare,SMB,T03,Vancouver,Canada,2018-08-02
+C0009,Lakeshore Labs,Life Sciences,Mid-Market,T07,Auckland,New Zealand,2024-08-01
+C0010,Harborview Labs,Life Sciences,SMB,T07,Auckland,New Zealand,2023-05-24
+C0011,Granite Foods,Consumer Goods,Enterprise,T02,Dallas,United States,2023-05-25
+C0012,Apex Retail Group,Retail,Enterprise,T01,Toronto,Canada,2024-01-11
+C0013,Granite Manufacturing,Manufacturing,Mid-Market,T02,Chicago,United States,2022-10-06
+C0014,Oakridge Engineering,Professional Services,Mid-Market,T03,Vancouver,Canada,2023-05-26
+C0015,Meridian Labs,Life Sciences,Mid-Market,T05,Amsterdam,Netherlands,2023-10-12
+C0016,Harborview Financial,Financial Services,Mid-Market,T07,Melbourne,Australia,2024-10-24
+C0017,Stonegate Retail Group,Retail,Mid-Market,T01,Toronto,Canada,2021-03-29
+C0018,Westfield Labs,Life Sciences,Enterprise,T06,Paris,France,2023-01-30
+C0019,Ironwood Health,Healthcare,Mid-Market,T06,Lisbon,Portugal,2019-07-20
+C0020,Pinecrest Foods,Consumer Goods,Enterprise,T07,Sydney,Australia,2023-02-13
+C0021,Cedar Labs,Life Sciences,Mid-Market,T03,San Francisco,United States,2023-11-06
+C0022,Westfield Retail Group,Retail,SMB,T01,Toronto,Canada,2019-03-04
+C0023,Pinecrest Engineering,Professional Services,SMB,T03,Seattle,United States,2018-04-17
+C0024,Harborview Logistics,Transportation & Logistics,Enterprise,T07,Auckland,New Zealand,2018-07-25
+C0025,Lakeshore Logistics,Transportation & Logistics,SMB,T02,Minneapolis,United States,2018-07-25
+C0026,Lakeshore Retail Group,Retail,SMB,T02,Chicago,United States,2021-10-28
+C0027,Clearpath Foods,Consumer Goods,SMB,T07,Sydney,Australia,2020-10-07
+C0028,Harborview Partners,Professional Services,Enterprise,T03,Vancouver,Canada,2018-08-27
+C0029,Harborview Energy,Energy & Utilities,Mid-Market,T01,Atlanta,United States,2020-03-15
+C0030,Harborview Engineering,Professional Services,Mid-Market,T06,Lisbon,Portugal,2021-07-28
+C0031,Meridian Foods,Consumer Goods,SMB,T01,New York,United States,2018-06-04
+C0032,Ironwood Labs,Life Sciences,Enterprise,T03,San Francisco,United States,2018-10-30
+C0033,Meridian Energy,Energy & Utilities,Mid-Market,T01,Toronto,Canada,2023-12-21
+C0034,Ironwood Logistics,Transportation & Logistics,SMB,T02,Minneapolis,United States,2020-08-09
+C0035,Westfield Foods,Consumer Goods,SMB,T03,Seattle,United States,2023-02-25
+C0036,Meridian Retail Group,Retail,Mid-Market,T01,New York,United States,2023-03-01
+C0037,Clearpath Retail Group,Retail,SMB,T04,Sao Paulo,Brazil,2023-10-25
+C0038,Ironwood Retail Group,Retail,SMB,T04,Mexico City,Mexico,2023-07-18
+C0039,Keystone Manufacturing,Manufacturing,Enterprise,T03,San Francisco,United States,2019-10-10
+C0040,Northbridge Manufacturing,Manufacturing,Mid-Market,T05,Stockholm,Sweden,2020-03-24
+C0041,Summit Retail Group,Retail,Mid-Market,T03,Vancouver,Canada,2021-11-14
+C0042,Westfield Partners,Professional Services,SMB,T06,Madrid,Spain,2021-09-24
+C0043,Lakeshore Foods,Consumer Goods,Enterprise,T05,Berlin,Germany,2018-12-25
+C0044,Clearpath Labs,Life Sciences,Mid-Market,T01,Atlanta,United States,2023-11-26
+C0045,Brightwell Financial,Financial Services,Mid-Market,T04,Bogota,Colombia,2022-06-07
+C0046,Ironwood Partners,Professional Services,Enterprise,T06,Milan,Italy,2022-07-10
+C0047,Meridian Logistics,Transportation & Logistics,Mid-Market,T04,Mexico City,Mexico,2020-09-29
+C0048,Redstone Engineering,Professional Services,SMB,T01,Atlanta,United States,2020-01-23
+C0049,Bluewater Energy,Energy & Utilities,Mid-Market,T01,Boston,United States,2021-05-01
+C0050,Silverline Retail Group,Retail,Enterprise,T06,Milan,Italy,2022-11-29
+C0051,Silverline Engineering,Professional Services,Mid-Market,T07,Sydney,Australia,2021-04-21
+C0052,Lakeshore Manufacturing,Manufacturing,Mid-Market,T02,Dallas,United States,2023-07-25
+C0053,Keystone Energy,Energy & Utilities,Mid-Market,T06,Milan,Italy,2023-01-05
+C0054,Summit Health,Healthcare,SMB,T05,London,United Kingdom,2019-03-29
+C0055,Clearpath Health,Healthcare,Enterprise,T03,San Francisco,United States,2023-08-17
+C0056,Keystone Foods,Consumer Goods,Enterprise,T02,Minneapolis,United States,2022-05-07
+C0057,Redstone Partners,Professional Services,Enterprise,T03,San Francisco,United States,2018-03-27
+C0058,Ironwood Financial,Financial Services,Enterprise,T05,Amsterdam,Netherlands,2024-05-22
+C0059,Granite Logistics,Transportation & Logistics,Mid-Market,T02,Dallas,United States,2023-08-22
+C0060,Granite Energy,Energy & Utilities,Mid-Market,T03,Vancouver,Canada,2022-11-18

@@ -1,0 +1,98 @@
+table etl_run_log
+	lineageTag: a83b43cf-bac8-5324-a0b6-0945ed5dfb04
+
+	measure 'Load Runs' = COUNTROWS ( etl_run_log )
+		formatString: #,0
+		displayFolder: Ops
+		lineageTag: fee01b7b-d491-578d-b006-a9ef5fc2fe92
+
+	measure 'Failed Loads' = CALCULATE ( COUNTROWS ( etl_run_log ), etl_run_log[status] = "Failed" )
+		formatString: #,0
+		displayFolder: Ops
+		lineageTag: 5d3157c9-757d-5565-893f-08a9331fcaf9
+
+	measure 'Rows Loaded' = CALCULATE ( SUM ( etl_run_log[rows_read] ), etl_run_log[status] = "Succeeded" )
+		formatString: #,0
+		displayFolder: Ops
+		lineageTag: 2522aebe-dd45-56ea-ac43-a72922c93f89
+
+	measure 'Last Successful Load' = CALCULATE ( MAX ( etl_run_log[ended_at] ), etl_run_log[status] = "Succeeded" )
+		formatString: yyyy-mm-dd hh:nn
+		displayFolder: Ops
+		lineageTag: ba791e40-0641-545c-9626-8c2dfb1ab1d2
+
+	measure 'Avg Load Seconds' = AVERAGE ( etl_run_log[duration_sec] )
+		formatString: 0.0
+		displayFolder: Ops
+		lineageTag: bafd6cc9-5368-57da-b9a9-ae297238b931
+
+	column batch_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: batch_id
+		lineageTag: 1385b424-27dd-56b3-bafa-4615fcf8c951
+
+	column table_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: table_name
+		lineageTag: bb20b590-f985-5a23-b73d-9b1442057dce
+
+	column source_path
+		dataType: string
+		summarizeBy: none
+		sourceColumn: source_path
+		lineageTag: fa259b59-bb02-5845-a79d-66cb0ea19e21
+
+	column load_mode
+		dataType: string
+		summarizeBy: none
+		sourceColumn: load_mode
+		lineageTag: 97d34543-faaf-5b19-a3c1-e4af7fd5903a
+
+	column status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: status
+		lineageTag: 7c61b40c-152d-5630-a700-9fc6a3b65ce0
+
+	column rows_read
+		dataType: int64
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: rows_read
+		lineageTag: 6eb39a26-dc00-56c8-a571-9f129f966446
+
+	column started_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		summarizeBy: none
+		sourceColumn: started_at
+		lineageTag: a9360d37-fdd5-504f-b26b-8427e79ec290
+
+	column ended_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		summarizeBy: none
+		sourceColumn: ended_at
+		lineageTag: 43fcdcac-9056-526d-abe7-0c5f891d5c3e
+
+	column duration_sec
+		dataType: double
+		formatString: 0.0
+		summarizeBy: sum
+		sourceColumn: duration_sec
+		lineageTag: 68bc7c55-baed-546d-bbc0-18e5b9cc1344
+
+	column error_message
+		dataType: string
+		summarizeBy: none
+		sourceColumn: error_message
+		lineageTag: 0dba5eed-bf19-5dbd-be5d-d0c17effad11
+
+	partition etl_run_log = entity
+		mode: directLake
+		source
+			entityName: etl_run_log
+			schemaName: dbo
+			expressionSource: DatabaseQuery

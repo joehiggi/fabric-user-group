@@ -1,0 +1,54 @@
+table fact_sales_target
+	lineageTag: 1993c63a-c4b7-5a62-aa7d-703e33118c87
+
+	column territory_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: territory_id
+		lineageTag: 89bebe3b-a5e8-565b-90ae-35cabefe1ba4
+
+	column month_start_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		isHidden
+		summarizeBy: none
+		sourceColumn: month_start_date
+		lineageTag: d72e1b60-85ad-5025-8346-3116b9984988
+
+	column target_amount
+		dataType: decimal
+		formatString: \$#,0
+		isHidden
+		summarizeBy: sum
+		sourceColumn: target_amount
+		lineageTag: c1ff9da1-39b5-5f31-be67-563c28bba488
+
+	column _source_file
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _source_file
+		lineageTag: 51750f15-453c-5498-8c39-ad7baeb42b87
+
+	column _batch_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _batch_id
+		lineageTag: fc9eb507-0bc9-531d-bd6e-440deedb8ee2
+
+	column _loaded_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		isHidden
+		summarizeBy: none
+		sourceColumn: _loaded_at
+		lineageTag: 33ca2d68-5b52-5a28-a06b-686ba02df8c2
+
+	partition fact_sales_target = entity
+		mode: directLake
+		source
+			entityName: fact_sales_target
+			schemaName: dbo
+			expressionSource: DatabaseQuery

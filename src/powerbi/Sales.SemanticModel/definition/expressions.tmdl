@@ -1,0 +1,8 @@
+/// Direct Lake source. Lakehouse > SQL analytics endpoint > Settings: copy the
+/// SQL connection string and the endpoint ID (GUID in the browser URL).
+expression DatabaseQuery =
+		let
+		    database = Sql.Database("{{SQL_ENDPOINT_CONNECTION_STRING}}", "{{SQL_ENDPOINT_ID}}")
+		in
+		    database
+	lineageTag: f399f574-d127-5a87-b853-52bf9ed78400

@@ -1,0 +1,77 @@
+table dim_sales_rep
+	lineageTag: 400ed01e-ef6c-5179-8836-aab1f7b9a1c3
+
+	column sales_rep_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: sales_rep_id
+		lineageTag: 702ef30d-f0a4-58ff-8e70-5b4746b50deb
+
+	column sales_rep_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: sales_rep_name
+		lineageTag: 1d934eda-8418-5c52-80b1-4815a802eec7
+
+	column title
+		dataType: string
+		summarizeBy: none
+		sourceColumn: title
+		lineageTag: c2b2aceb-2792-5b42-b06f-2d6eb6cb2b9f
+
+	column region
+		dataType: string
+		summarizeBy: none
+		sourceColumn: region
+		lineageTag: 651aabcc-03b4-5b66-b525-8fec3a7078b3
+
+	column territory_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: territory_id
+		lineageTag: 02fb2bbc-9f1a-55aa-b21a-5635f8c2bbf7
+
+	column manager_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: manager_id
+		lineageTag: 512785f4-82aa-5a89-8f5f-a9bef4e4efe5
+
+	column hire_date
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		summarizeBy: none
+		sourceColumn: hire_date
+		lineageTag: 3a7993c9-5ed2-5248-99d0-b29fd80ed4b0
+
+	column _source_file
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _source_file
+		lineageTag: eaccc778-1b28-5d5d-856a-1b0e9b323050
+
+	column _batch_id
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: _batch_id
+		lineageTag: 2c2a305a-0b6a-51ed-870e-8e8107488855
+
+	column _loaded_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		isHidden
+		summarizeBy: none
+		sourceColumn: _loaded_at
+		lineageTag: 9f0c17ce-5359-5fdd-ba27-c14a836029d0
+
+	partition dim_sales_rep = entity
+		mode: directLake
+		source
+			entityName: dim_sales_rep
+			schemaName: dbo
+			expressionSource: DatabaseQuery

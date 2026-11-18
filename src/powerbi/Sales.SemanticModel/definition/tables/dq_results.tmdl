@@ -1,0 +1,52 @@
+table dq_results
+	lineageTag: 2ff2afa6-eaa7-59b7-9cfc-847f2e67683a
+
+	measure 'DQ Checks Failed' = CALCULATE ( COUNTROWS ( dq_results ), dq_results[result] = "Fail" )
+		formatString: #,0
+		displayFolder: Ops
+		lineageTag: 94a7a4ae-c21b-5a66-b0e4-1f88f7d9dfb4
+
+	column batch_id
+		dataType: string
+		summarizeBy: none
+		sourceColumn: batch_id
+		lineageTag: b2f0e0f0-ea7d-5b1c-9256-ed620730e0fd
+
+	column checked_at
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn:ss
+		summarizeBy: none
+		sourceColumn: checked_at
+		lineageTag: 5935e492-f10f-5017-bff8-62334f37abac
+
+	column check_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: check_name
+		lineageTag: 51f2942f-bea7-5112-a1ac-84dc267650e9
+
+	column severity
+		dataType: string
+		summarizeBy: none
+		sourceColumn: severity
+		lineageTag: b1efeff3-1759-53c0-b2f2-208d7093bf02
+
+	column bad_rows
+		dataType: int64
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: bad_rows
+		lineageTag: fa0964a6-d790-5034-9677-17735593d1fa
+
+	column result
+		dataType: string
+		summarizeBy: none
+		sourceColumn: result
+		lineageTag: b0b13756-e186-5a9f-83ad-7332b2e878a3
+
+	partition dq_results = entity
+		mode: directLake
+		source
+			entityName: dq_results
+			schemaName: dbo
+			expressionSource: DatabaseQuery

@@ -1,0 +1,17 @@
+product_id,product_name,category,subcategory,list_price,unit_cost
+P001,Platform Subscription - Core,Software,Platform,12000.00,2400.00
+P002,Platform Subscription - Professional,Software,Platform,24000.00,4800.00
+P003,Platform Subscription - Enterprise,Software,Platform,60000.00,12000.00
+P004,Analytics Add-on,Software,Add-on,8000.00,1600.00
+P005,Security & Compliance Add-on,Software,Add-on,9500.00,1900.00
+P006,Integration Add-on,Software,Add-on,6000.00,1200.00
+P007,Implementation Services (day),Services,Delivery,1800.00,1100.00
+P008,Training Workshop,Services,Enablement,3500.00,1800.00
+P009,Advisory Retainer (month),Services,Advisory,7500.00,4500.00
+P010,Data Migration Package,Services,Delivery,15000.00,9000.00
+P011,Edge Gateway,Hardware,Devices,2400.00,1450.00
+P012,Sensor Kit (10-pack),Hardware,Devices,950.00,520.00
+P013,Rugged Tablet,Hardware,Devices,1600.00,1050.00
+P014,Standard Support (annual),Support,Support Plans,4000.00,1200.00
+P015,Premium Support (annual),Support,Support Plans,10000.00,3500.00
+P016,Extended Hardware Warranty,Support,Warranty,600.00,150.00

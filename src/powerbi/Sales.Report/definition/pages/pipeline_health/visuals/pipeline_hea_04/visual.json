@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "pipeline_hea_04",
+  "position": {
+    "x": 20,
+    "y": 160,
+    "z": 4,
+    "width": 760,
+    "height": 540,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "started_at"
+                }
+              },
+              "queryRef": "etl_run_log.started_at",
+              "nativeQueryRef": "started_at"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "table_name"
+                }
+              },
+              "queryRef": "etl_run_log.table_name",
+              "nativeQueryRef": "table_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "status"
+                }
+              },
+              "queryRef": "etl_run_log.status",
+              "nativeQueryRef": "status"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "rows_read"
+                }
+              },
+              "queryRef": "etl_run_log.rows_read",
+              "nativeQueryRef": "rows_read"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "duration_sec"
+                }
+              },
+              "queryRef": "etl_run_log.duration_sec",
+              "nativeQueryRef": "duration_sec"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "etl_run_log"
+                    }
+                  },
+                  "Property": "error_message"
+                }
+              },
+              "queryRef": "etl_run_log.error_message",
+              "nativeQueryRef": "error_message"
+            }
+          ]
+        }
+      }
+    },
+    "drawVisualDataBars": false
+  }
+}
