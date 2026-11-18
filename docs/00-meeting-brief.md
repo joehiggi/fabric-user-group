@@ -1,6 +1,6 @@
 # Fabric Tips & Tricks — Session Brief
 
-**Event:** Fabric User Group · **Date:** Thursday, 19 Nov 2026 · **Format:** talk + live demo
+**Presenter:** Joey Higgins · **Event:** Fabric User Group · **Date:** Thursday, 19 Nov 2026 · **Format:** 15-min talk + live demo
 **Repo branch:** `tips-and-tricks`
 
 ---
@@ -15,17 +15,19 @@ The point is not the data. It's the **patterns** that keep a Fabric solution rel
 3. **Direct Lake semantic model.** Report-speed queries over Delta tables with no import refresh. The model is defined in code (TMDL), so it can be reviewed and diffed.
 4. **Everything as code.** Notebooks, pipeline JSON, TMDL, PBIR and SQL live in Git, and one `fab` CLI script deploys them to any tenant.
 
-## Agenda (≈ 45 min)
+## Agenda (15 min)
 
-| # | Segment | Min | Doc |
-|---|---------|-----|-----|
-| 1 | Why this matters / exec summary | 5 | this page |
-| 2 | Lakehouse & notebooks | 8 | [01](01-lakehouse.md) · [02](02-notebooks.md) |
-| 3 | Pipeline: retries, notifications, metadata loads | 10 | [03](03-pipeline.md) |
-| 4 | Semantic model (Direct Lake, TMDL) | 7 | [04](04-semantic-model.md) |
-| 5 | Report (PBIR) + SQL endpoint | 5 | [05](05-report.md) · [06](06-sql.md) |
-| 6 | **Live demo** (6 steps) | 10 | [demo-runbook](demo-runbook.md) |
-| 7 | Deploy with `fab` CLI · Q&A | 2+ | [07](07-deploy-fab-cli.md) |
+| # | Segment | Min | Slide | Doc |
+|---|---------|-----|-------|-----|
+| 1 | Intro: what we'll cover | 1 | 1 | this page |
+| 2 | Demo 01 · Lakehouse | 2 | 2 | [01](01-lakehouse.md) |
+| 3 | Demo 02 · Pipeline: retry, reload, break | 4 | 2 | [03](03-pipeline.md) · [02](02-notebooks.md) |
+| 4 | Demo 03 · Semantic model | 2 | 2 | [04](04-semantic-model.md) |
+| 5 | Demo 04 · Report | 2 | 2 | [05](05-report.md) |
+| 6 | Recap: what we covered | 2 | 3 | |
+| 7 | Q&A | 2 | 3 | |
+
+Out of scope on stage, but in the repo for anyone who asks: notebooks in depth ([02](02-notebooks.md)), SQL endpoint ([06](06-sql.md)), fab CLI deploy ([07](07-deploy-fab-cli.md)).
 
 ## The dataset (company-agnostic)
 
