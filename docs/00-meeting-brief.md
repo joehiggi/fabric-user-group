@@ -24,7 +24,7 @@ The point is not the data. It's the **patterns** that keep a Fabric solution rel
 | 3 | Pipeline: retries, notifications, metadata loads | 10 | [03](03-pipeline.md) |
 | 4 | Semantic model (Direct Lake, TMDL) | 7 | [04](04-semantic-model.md) |
 | 5 | Report (PBIR) + SQL endpoint | 5 | [05](05-report.md) · [06](06-sql.md) |
-| 6 | **Live demo** | 8 | [demo-runbook](demo-runbook.md) |
+| 6 | **Live demo** (6 steps) | 10 | [demo-runbook](demo-runbook.md) |
 | 7 | Deploy with `fab` CLI · Q&A | 2+ | [07](07-deploy-fab-cli.md) |
 
 ## The dataset (company-agnostic)
