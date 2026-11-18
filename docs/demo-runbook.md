@@ -11,7 +11,7 @@ Set once: `LH="Fabric User Group Demo.Workspace/lh_sales.Lakehouse"`
 - [ ] Browser tabs open: workspace, lakehouse, pipeline, Monitor hub, report, SQL endpoint
 - [ ] Spark session warm (run any notebook cell 5 min before)
 
-15-minute session: 1 min intro → **10 min demo (4 parts, matching slide 2)** → 2 min recap → 2 min Q&A.
+15-minute session: 1 min intro → **10 min demo (4 parts, matching slide 3)** → 2 min recap → 2 min Q&A.
 
 ## 01 · Lakehouse: land the files (2 min)
 1. Lakehouse → **Files/landing/**: one folder per table

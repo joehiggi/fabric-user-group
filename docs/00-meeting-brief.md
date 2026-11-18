@@ -19,13 +19,13 @@ The point is not the data. It's the **patterns** that keep a Fabric solution rel
 
 | # | Segment | Min | Slide | Doc |
 |---|---------|-----|-------|-----|
-| 1 | Intro: what we'll cover | 1 | 1 | this page |
-| 2 | Demo 01 · Lakehouse | 2 | 2 | [01](01-lakehouse.md) |
-| 3 | Demo 02 · Pipeline: retry, reload, break | 4 | 2 | [03](03-pipeline.md) · [02](02-notebooks.md) |
-| 4 | Demo 03 · Semantic model | 2 | 2 | [04](04-semantic-model.md) |
-| 5 | Demo 04 · Report | 2 | 2 | [05](05-report.md) |
-| 6 | Recap: what we covered | 2 | 3 | |
-| 7 | Q&A | 2 | 3 | |
+| 1 | Title + what we'll cover | 1 | 1–2 | this page |
+| 2 | Demo 01 · Lakehouse | 2 | 3 | [01](01-lakehouse.md) |
+| 3 | Demo 02 · Pipeline: retry, reload, break | 4 | 3 | [03](03-pipeline.md) · [02](02-notebooks.md) |
+| 4 | Demo 03 · Semantic model | 2 | 3 | [04](04-semantic-model.md) |
+| 5 | Demo 04 · Report | 2 | 3 | [05](05-report.md) |
+| 6 | Recap: what we covered | 2 | 4 | |
+| 7 | Sign-off + Q&A | 2 | 5 | |
 
 Out of scope on stage, but in the repo for anyone who asks: notebooks in depth ([02](02-notebooks.md)), SQL endpoint ([06](06-sql.md)), fab CLI deploy ([07](07-deploy-fab-cli.md)).
 
