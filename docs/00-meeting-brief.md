@@ -15,17 +15,15 @@ The point is not the data. It's the **patterns** that keep a Fabric solution rel
 3. **Direct Lake semantic model.** Report-speed queries over Delta tables with no import refresh. The model is defined in code (TMDL), so it can be reviewed and diffed.
 4. **Everything as code.** Notebooks, pipeline JSON, TMDL, PBIR and SQL live in Git, and one `fab` CLI script deploys them to any tenant.
 
-## Agenda (15 min, high level)
+## Agenda (15 min total)
 
-| # | Segment | Min | Slide | Doc |
-|---|---------|-----|-------|-----|
-| 1 | Title + the four stops | 1 | 1–2 | this page |
-| 2 | 01 · Ingestion | 2 | 3 | [01](01-lakehouse.md) |
-| 3 | 02 · Usage (SQL endpoint) | 2 | 3 | [06](06-sql.md) |
-| 4 | 03 · Build: pipelines, notebooks, semantic models | 4 | 3 | [03](03-pipeline.md) · [02](02-notebooks.md) · [04](04-semantic-model.md) |
-| 5 | 04 · Final state: reports | 2 | 3 | [05](05-report.md) |
-| 6 | Recap: one tip per stop | 2 | 4 | |
-| 7 | Sign-off + Q&A | 2 | 5 | |
+| Slide | Segment | Doc |
+|---|---|---|
+| 1 | Title | |
+| 2 | Today: four stages, one pattern | this page |
+| 3 | Live demo: 01 Ingest · 02 Transform · 03 Model · 04 Serve | [runbook](demo-runbook.md) · [01](01-lakehouse.md) · [02](02-notebooks.md) · [03](03-pipeline.md) · [06](06-sql.md) · [04](04-semantic-model.md) · [05](05-report.md) |
+| 4 | Recap: one tip per stage | |
+| 5 | Let's connect (LinkedIn + repo) · Q&A | |
 
 Not on stage, but in the repo for anyone who asks: deep dives in each doc, and the fab CLI deploy ([07](07-deploy-fab-cli.md)).
 
