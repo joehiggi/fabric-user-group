@@ -12,7 +12,7 @@ Set once: `LH="Fabric User Group Demo.Workspace/lh_sales.Lakehouse"`
 - [ ] Browser tabs open: workspace, lakehouse, pipeline, Monitor hub, report, SQL endpoint
 - [ ] Spark session warm (run any notebook cell 5 min before)
 
-Four industry-standard stages, matching slides 2–4. Same syntax every time: **<verb> from <previous output>**.
+Four industry-standard stages, matching slide 3. Same syntax every time: **<verb> from <previous output>**.
 
 | Stage | Medallion | Action | Fabric item |
 |---|---|---|---|
@@ -30,16 +30,16 @@ Four industry-standard stages, matching slides 2–4. Same syntax every time: **
 1. **Pipeline:** open `pl_load_sales` (config → ForEach → notebook). The run started on the title slide with `simulate_failure_for_table = dim_product`. In Monitor hub, it fails once, retries and succeeds. November is loaded.
 2. **Notebook:** a quick look at `nb_load_table`'s MERGE
 3. **SQL endpoint:** `SELECT TOP 10 * FROM dbo.vw_sales_enriched`, the fact joined to every dimension
-> 💡 Merge, don't append. Re-runs never duplicate.
+> 💡 Merge instead of append. Re-runs never duplicate.
 
 ## 03 · Model: model from joined tables
 1. Open the `Sales` semantic model: the star schema and the `Revenue` measure
 2. **Revenue MTD** includes November, picked up by Direct Lake with no copy
-> 💡 Direct Lake, no copy. Business rules live in measures.
+> 💡 Put rules in measures. Direct Lake serves them with no copy.
 
 ## 04 · Serve: report from the model
 Executive Overview → **Pipeline Health** (the retry from stage 02 is on it).
-> 💡 Show the data's health next to the data.
+> 💡 Report on pipeline health next to the business numbers.
 
 *Optional:* copy `fact_sales_BROKEN.csv` into `landing/fact_sales/` and run, to show the failure alert ("fail fast on bad data"). Remove it afterwards.
 

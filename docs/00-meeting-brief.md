@@ -20,9 +20,9 @@ The point is not the data. It's the **patterns** that keep a Fabric solution rel
 | Slide | Segment | Doc |
 |---|---|---|
 | 1 | Title | |
-| 2 | Today: four stages, one pattern | this page |
+| 2 | The dataset: a made-up B2B seller | this page (dataset section) |
 | 3 | Live demo: 01 Ingest · 02 Transform · 03 Model · 04 Serve | [runbook](demo-runbook.md) · [01](01-lakehouse.md) · [02](02-notebooks.md) · [03](03-pipeline.md) · [06](06-sql.md) · [04](04-semantic-model.md) · [05](05-report.md) |
-| 4 | Recap: one tip per stage | |
+| 4 | Recap: four habits to take home | |
 | 5 | Let's connect (LinkedIn + repo) · Q&A | |
 
 Not on stage, but in the repo for anyone who asks: deep dives in each doc, and the fab CLI deploy ([07](07-deploy-fab-cli.md)).
