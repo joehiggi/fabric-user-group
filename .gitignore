@@ -1,0 +1,9 @@
+build/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+.env
+# Power BI Desktop local files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
