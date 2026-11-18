@@ -13,6 +13,8 @@ A complete, runnable Microsoft Fabric demo, built entirely as code. A tiny ficti
 
 The pipeline is metadata-driven, retries transient failures, fails fast on bad data, sends notifications and logs every run. Everything deploys to any tenant with one command using the [Fabric CLI](https://microsoft.github.io/fabric-cli/).
 
+> 👉 **Attending or catching up? Start with [FOLLOW-ALONG.md](FOLLOW-ALONG.md)**, a step-by-step guide that matches the talk slide by slide.
+
 Presented at a Fabric User Group by **Joey Higgins** · [LinkedIn](https://www.linkedin.com/in/your-handle)
 
 ## Quick start
@@ -78,6 +80,7 @@ tests/                           data integrity + cross-artifact consistency (ru
 
 | | |
 |---|---|
+| [**Follow along**](FOLLOW-ALONG.md) | step-by-step guide matching the presentation |
 | [Session brief](docs/00-meeting-brief.md) | summary, agenda, takeaways |
 | [Demo runbook](docs/demo-runbook.md) | step-by-step live demo |
 | [01 Lakehouse](docs/01-lakehouse.md) · [02 Notebooks](docs/02-notebooks.md) · [03 Pipeline](docs/03-pipeline.md) | ingest + transform |
